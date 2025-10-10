@@ -1,0 +1,1 @@
+This experiment is done on tiny imageNet because ImageNet is too big to be handled by hardware
