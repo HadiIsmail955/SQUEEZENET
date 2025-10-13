@@ -13,4 +13,4 @@ def extract_zip_with_progress(zip_path, extract_to):
         for member in tqdm(members, desc="Extracting", unit="file"):
             zip_ref.extract(member, path=extract_to)
 
-    print(f"✅ Extraction complete: {extract_to} with size {os.path.getsize(extract_to)} bytes")
+    print(f"✅ Extraction complete: {extract_to}")

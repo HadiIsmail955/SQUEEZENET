@@ -1,0 +1,21 @@
+Basic Transforms
+
+transforms.Resize(size) → resize image
+transforms.CenterCrop(size) → crop center
+transforms.RandomCrop(size) → random crop
+transforms.ToTensor() → convert PIL→Tensor
+transforms.Normalize(mean, std) → normalize values
+
+Data Augmentation
+
+transforms.RandomHorizontalFlip(p=0.5) → flip horizontally
+transforms.RandomVerticalFlip(p=0.5) → flip vertically
+transforms.RandomRotation(degrees) → rotate randomly
+transforms.ColorJitter(brightness, contrast, saturation) → change colors
+transforms.RandomResizedCrop(size) → random crop + resize
+
+Advanced / Functional
+
+transforms.Lambda(func) → custom transform
+transforms.RandomApply([transform_list], p) → apply randomly
+transforms.RandomChoice([transform1, transform2]) → pick one randomly
