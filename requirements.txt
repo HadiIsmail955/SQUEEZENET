@@ -3,4 +3,4 @@ torchvision
 tqdm
 numpy
 matplotlib
-
+torchinfo
