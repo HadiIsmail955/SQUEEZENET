@@ -23,7 +23,9 @@ class DataModule:
         val_dir = os.path.join(self.data_dir, "val")
 
         self.train_dataset = datasets.ImageFolder(root=train_dir, transform=self.train_transforms)
-        self.val_dataset = TinyImageNetValDataset(val_dir, transform=self.val_transforms)
+        train_class_to_idx = self.train_dataset.class_to_idx
+
+        self.val_dataset = TinyImageNetValDataset(val_dir, transform=self.val_transforms, class_to_idx=train_class_to_idx)
     
     def setupTest(self):
         test_dir = os.path.join(self.data_dir, "test")
