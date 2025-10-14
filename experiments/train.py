@@ -22,7 +22,8 @@ def train_model(data_module_instance, device, experiment_DIR, num_classes=200, n
     model = SqueezeNet(num_classes=num_classes,shortcut=shortcut).to(device)
     criterion = torch.nn.CrossEntropyLoss()
     optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
-    scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=10, gamma=0.1)
+    scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=num_epochs, eta_min=1e-5)
+    # scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=10, gamma=0.1)
 
     log_file_path = os.path.join(LOG_DIR, "model_log.txt")
     with open(log_file_path, "w",encoding="utf-8") as f:
@@ -51,10 +52,11 @@ def train_model(data_module_instance, device, experiment_DIR, num_classes=200, n
             loss = criterion(outputs, labels)
             loss.backward()
             optimizer.step()
-
+            
             running_loss += loss.item() * images.size(0)
             loop.set_postfix(loss=loss.item())
 
+        scheduler.step()
         epoch_loss = running_loss / len(train_loader.dataset)
         train_loss_history.append(epoch_loss)
 
