@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 
 DATA_DIR = "./data/tiny-imagenet-200"
 BATCH_SIZE = 32
-IMAGE_SIZE = 224 #224 or 64
+IMAGE_SIZE = 64 #224 or 64
 NUM_WORKERS = 4
 NUM_CLASSES = 200
 NUM_channels = 3
