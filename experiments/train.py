@@ -35,12 +35,17 @@ def train_model(data_module_instance, device, experiment_DIR, num_classes=200, n
 
     best_val_acc = 0.0
     train_loss_history = []
+    top1_train_history = []
+    top5_train_history = []
     top1_val_history = []
     top5_val_history = []
 
     for epoch in range(num_epochs):
         model.train()
         running_loss = 0.0
+        total=0
+        top1_train_acc=0.0
+        top5_train_acc=0.0
 
         loop= tqdm(train_loader, desc=f"Epoch {epoch+1}/{num_epochs}",leave=False)
 
@@ -54,7 +59,11 @@ def train_model(data_module_instance, device, experiment_DIR, num_classes=200, n
             optimizer.step()
             
             running_loss += loss.item() * images.size(0)
+            top1_train_acc += topk_accuracy(outputs, labels, k=1) * labels.size(0)
+            top5_train_acc += topk_accuracy(outputs, labels, k=5) * labels.size(0)
+            total += labels.size(0)
             loop.set_postfix(loss=loss.item())
+
 
         scheduler.step()
         epoch_loss = running_loss / len(train_loader.dataset)
@@ -80,9 +89,14 @@ def train_model(data_module_instance, device, experiment_DIR, num_classes=200, n
                 })
             top1_val_acc /= total
             top5_val_acc /= total
+            top1_train_acc /= total
+            top5_train_acc /= total
+
+            top1_train_history.append(top1_train_acc)
+            top5_train_history.append(top5_train_acc)
             top1_val_history.append(top1_val_acc)
             top5_val_history.append(top5_val_acc)
-        print(f"Epoch [{epoch+1}/{num_epochs}], Loss: {epoch_loss:.4f}, Top-1 Val Acc: {top1_val_acc:.4f}, Top-5 Val Acc: {top5_val_acc:.4f}")
+        print(f"Epoch [{epoch+1}/{num_epochs}], Loss: {epoch_loss:.4f}, Top-1 Train Acc: {top1_train_acc:.4f}, Top-5 Train Acc: {top5_train_acc:.4f}, Top-1 Val Acc: {top1_val_acc:.4f}, Top-5 Val Acc: {top5_val_acc:.4f}")
 
         if top1_val_acc > best_val_acc:
             save_checkpoint(
@@ -100,6 +114,8 @@ def train_model(data_module_instance, device, experiment_DIR, num_classes=200, n
     with open(history_path, "w") as f:
         json.dump({
             "train_loss": train_loss_history,
+            "top1_train": top1_train_history,
+            "top5_train": top5_train_history,
             "top1_val": top1_val_history,
             "top5_val": top5_val_history
         }, f, indent=4)
