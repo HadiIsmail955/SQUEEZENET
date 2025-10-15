@@ -1,4 +1,6 @@
 env
 data/tiny-imagenet-200
 data/tiny-imagenet-200.zip
+data/imagenet10_split
+data/imagenet10_split.zip
 experiments/runs

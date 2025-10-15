@@ -6,11 +6,11 @@ import torch
 import torchvision
 import matplotlib.pyplot as plt
 
-DATA_DIR = "./data/tiny-imagenet-200"
+DATA_DIR = "./data/imagenet10_split" #"./data/tiny-imagenet-200"
 BATCH_SIZE = 32
-IMAGE_SIZE = 64 #224 or 64
+IMAGE_SIZE = 224 #224 or 64
 NUM_WORKERS = 4
-NUM_CLASSES = 200
+NUM_CLASSES = 10
 NUM_channels = 3
 NUM_EPOCHS = 20
 LEARNING_RATE = 1e-3 #4e-2
@@ -22,7 +22,7 @@ def main():
     experiment_DIR=f"./experiments/runs/{datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")}"
     print("Starting main...")
     # check if data set is available, if not download it
-    DATA_DIR=download_script.download_and_extract_tiny_imagenet()
+    # DATA_DIR=download_script.download_and_extract_tiny_imagenet()
     print(f"Dataset is available at: {DATA_DIR}")
     data_module_instance = scripts.data_module.DataModule(data_dir=DATA_DIR, batch_size=BATCH_SIZE, image_size=IMAGE_SIZE, num_workers=NUM_WORKERS)
     print("Setting up data module...")

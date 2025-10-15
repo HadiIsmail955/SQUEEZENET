@@ -31,7 +31,7 @@ def train_model(data_module_instance, device, experiment_DIR, num_classes=200, n
         f.write(f"Num classes: {num_classes}, Num epochs: {num_epochs}, LR: {learning_rate}\n")
         f.write(f"Model architecture:\n{model}\n\n")
         with redirect_stdout(f):
-            summary(model, input_size=(1,3,64,64), verbose=1)
+            summary(model, input_size=(1,3,224,224), verbose=1)
 
     best_val_acc = 0.0
     train_loss_history = []
