@@ -64,7 +64,8 @@ def train_model(data_module_instance, device, experiment_DIR, num_classes=200, n
             total += labels.size(0)
             loop.set_postfix(loss=loss.item())
 
-
+        top1_train_acc /= total
+        top5_train_acc /= total
         scheduler.step()
         epoch_loss = running_loss / len(train_loader.dataset)
         train_loss_history.append(epoch_loss)
@@ -89,8 +90,6 @@ def train_model(data_module_instance, device, experiment_DIR, num_classes=200, n
                 })
             top1_val_acc /= total
             top5_val_acc /= total
-            top1_train_acc /= total
-            top5_train_acc /= total
 
             top1_train_history.append(top1_train_acc)
             top5_train_history.append(top5_train_acc)

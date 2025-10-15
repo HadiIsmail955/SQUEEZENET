@@ -7,16 +7,16 @@ import torchvision
 import matplotlib.pyplot as plt
 
 DATA_DIR = "./data/imagenet10_split" #"./data/tiny-imagenet-200"
-BATCH_SIZE = 32
+BATCH_SIZE = 120
 IMAGE_SIZE = 224 #224 or 64
 NUM_WORKERS = 4
 NUM_CLASSES = 10
 NUM_channels = 3
-NUM_EPOCHS = 20
-LEARNING_RATE = 1e-3 #4e-2
+NUM_EPOCHS = 30
+LEARNING_RATE = 4e-2 #4e-2
 TRAIN=True
 SHOW_IMAGES=False
-SHORTCUT=None  # None, "simple", "complex"
+SHORTCUT="complex"  # None, "simple", "complex"
 
 def main():
     experiment_DIR=f"./experiments/runs/{datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")}"

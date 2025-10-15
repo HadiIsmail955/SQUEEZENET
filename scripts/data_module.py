@@ -36,11 +36,11 @@ class DataModule:
         self.test_dataset = datasets.ImageFolder(root=test_dir, transform=self.val_transforms)
 
     def train_dataloader(self):
-        verify_images(self.train_dataset)
+        # verify_images(self.train_dataset)
         return DataLoader(self.train_dataset, batch_size=self.batch_size, shuffle=True, num_workers=self.num_workers)
     
     def val_dataloader(self):
-        verify_images(self.val_dataset)
+        # verify_images(self.val_dataset)
         return DataLoader(self.val_dataset, batch_size=self.batch_size, shuffle=False, num_workers=self.num_workers)
     
     def test_dataloader(self):
