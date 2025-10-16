@@ -62,7 +62,7 @@ def train_model(data_module_instance, device, experiment_DIR, num_classes=200, n
             top1_train_acc += topk_accuracy(outputs, labels, k=1) * labels.size(0)
             top5_train_acc += topk_accuracy(outputs, labels, k=5) * labels.size(0)
             total += labels.size(0)
-            loop.set_postfix({"loss=":loss.item(),"learning_rate":scheduler.get_last_lr()[0]})
+            loop.set_postfix({"loss=":loss.item(),"learning_rate=":scheduler.get_last_lr()[0]})
 
         top1_train_acc /= total
         top5_train_acc /= total
