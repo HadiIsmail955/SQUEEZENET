@@ -22,7 +22,7 @@ def train_model(data_module_instance, device, experiment_DIR, num_classes=200, n
     model = SqueezeNet(num_classes=num_classes,shortcut=shortcut).to(device)
     criterion = torch.nn.CrossEntropyLoss()
     optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
-    scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=num_epochs, eta_min=1e-5)
+    scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=num_epochs, eta_min=1e-4)
     # scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=10, gamma=0.1)
 
     log_file_path = os.path.join(LOG_DIR, "model_log.txt")
