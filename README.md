@@ -71,9 +71,11 @@ Implementing and analyzing SqueezeNet helped develop a clearer **framework for d
 
 ### Experiment for SqueezeNet
 
-```
 Num classes: 10, Num epochs: 20, LR: 0.001
-Model architecture:
+
+### Model architecture:
+
+```
 SqueezeNet(
 (setm): Sequential(
 (0): Conv2d(3, 96, kernel_size=(7, 7), stride=(2, 2))
@@ -150,9 +152,7 @@ SqueezeNet(
 )
 ```
 
-==========================================================================================
-Layer (type:depth-idx) Output Shape Param #
-==========================================================================================
+### Layer (type:depth-idx) Output Shape Param
 
 ```
 SqueezeNet [1, 10] --
@@ -218,14 +218,12 @@ SqueezeNet [1, 10] --
 │ └─AdaptiveAvgPool2d: 2-17 [1, 10, 1, 1] --
 ```
 
-==========================================================================================
 Total params: 740,554
 Trainable params: 740,554
 Non-trainable params: 0
 Total mult-adds (Units.MEGABYTES): 737.44
-==========================================================================================
+
 Input size (MB): 0.60
 Forward/backward pass size (MB): 33.43
 Params size (MB): 2.96
 Estimated Total Size (MB): 37.00
-==========================================================================================
